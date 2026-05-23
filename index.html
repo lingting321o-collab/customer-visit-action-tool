@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>客户拜访纪要行动项整理</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Visit Notes</p>
+        <h1>客户拜访纪要行动项整理</h1>
+      </div>
+      <div class="mode-switch" aria-label="生成模式">
+        <button class="mode active" type="button" data-mode="local">本地</button>
+        <button class="mode" type="button" data-mode="api">AI API</button>
+      </div>
+    </header>
+
+    <section class="workspace">
+      <form class="input-pane" id="notesForm">
+        <div class="pane-head">
+          <label for="notesInput">拜访纪要</label>
+          <button class="ghost" type="button" id="sampleButton">示例</button>
+        </div>
+        <textarea id="notesInput" spellcheck="false" placeholder="粘贴客户拜访纪要、会议记录、微信群纪要或电话沟通摘要。"></textarea>
+
+        <div class="meta-grid">
+          <label>
+            客户名称
+            <input id="customerInput" type="text" placeholder="如：华东某制造客户">
+          </label>
+          <label>
+            拜访日期
+            <input id="dateInput" type="date">
+          </label>
+          <label>
+            默认负责人
+            <input id="ownerInput" type="text" placeholder="如：项目经理">
+          </label>
+        </div>
+
+        <div class="toolbar">
+          <button class="primary" type="submit">生成行动项</button>
+          <button class="secondary" type="button" id="clearButton">清空</button>
+        </div>
+      </form>
+
+      <section class="output-pane" aria-live="polite">
+        <div class="pane-head">
+          <div>
+            <span class="label">行动项</span>
+            <span class="count" id="itemCount">0</span>
+          </div>
+          <div class="actions">
+            <button class="ghost" type="button" id="copyButton">复制</button>
+            <button class="ghost" type="button" id="csvButton">CSV</button>
+          </div>
+        </div>
+
+        <div class="summary-strip" id="summaryStrip">
+          <div>
+            <strong id="highCount">0</strong>
+            <span>高优先级</span>
+          </div>
+          <div>
+            <strong id="datedCount">0</strong>
+            <span>有截止时间</span>
+          </div>
+          <div>
+            <strong id="ownerCount">0</strong>
+            <span>有负责人</span>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>事项</th>
+                <th>负责人</th>
+                <th>截止时间</th>
+                <th>优先级</th>
+                <th>状态</th>
+              </tr>
+            </thead>
+            <tbody id="itemsBody">
+              <tr class="empty-row">
+                <td colspan="5">暂无行动项</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="api-note" id="apiNote" hidden>
+          当前为前端占位模式，接入后端后可调用 OpenAI API 生成更准确的结构化行动项。
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
